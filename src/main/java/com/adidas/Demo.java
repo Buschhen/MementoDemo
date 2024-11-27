@@ -1,19 +1,25 @@
 package com.adidas;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
-public class Main {
+public class Demo {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Originator originator = new Originator();
+        Caretaker caretaker = new Caretaker();
 
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
+        // Setting and saving initial states
+        originator.setState("State #1");
+        caretaker.addMemento(originator.saveStateToMemento());
 
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
-        }
+        originator.setState("State #2");
+        caretaker.addMemento(originator.saveStateToMemento());
+
+        originator.setState("State #3");
+        System.out.println("Current State: " + originator.getState());
+
+        // Restoring previous states
+        originator.restoreStateFromMemento(caretaker.getMemento(0));
+        System.out.println("First saved State: " + originator.getState());
+
+        originator.restoreStateFromMemento(caretaker.getMemento(1));
+        System.out.println("Second saved State: " + originator.getState());
     }
 }
